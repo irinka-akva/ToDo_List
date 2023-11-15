@@ -49,6 +49,8 @@ a {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
   cursor: pointer;
+  -webkit-box-shadow: 0px 0px 4px 0px transparent;
+          box-shadow: 0px 0px 4px 0px transparent;
 }
 .btn:hover, .btn:focus-visible, .btn:active {
   background-color: #5850DD;
@@ -61,6 +63,7 @@ a {
   border: 1px solid #6C63FF;
   border-radius: 5px;
   color: #6C63FF;
+  outline: 2px solid transparent;
   -webkit-transition: outline 0.3s ease;
   transition: outline 0.3s ease;
 }
@@ -130,7 +133,7 @@ select::-ms-expand {
 }
 
 .settings {
-  padding-bottom: 13px;
+  padding-bottom: 35px;
 }
 .settings-wrapper {
   display: -webkit-box;
@@ -188,7 +191,7 @@ select::-ms-expand {
 .settings-select {
   width: 100%;
   height: 100%;
-  padding: 8px 25px 8px 8px;
+  padding: 5px 25px 5px 8px;
   cursor: pointer;
 }
 .settings-theme {
@@ -228,7 +231,7 @@ input[type=search]::-webkit-search-results-decoration {
 
 .main {
   position: relative;
-  min-height: 545px;
+  min-height: 500px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -239,8 +242,6 @@ input[type=search]::-webkit-search-results-decoration {
 }
 .main-empty {
   position: absolute;
-  visibility: hidden;
-  opacity: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -251,8 +252,9 @@ input[type=search]::-webkit-search-results-decoration {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transition: opacity 0.3s ease;
-  transition: opacity 0.3s ease;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 .main-empty-icon {
   margin-bottom: 20px;
@@ -304,7 +306,6 @@ input[type=search]::-webkit-search-results-decoration {
 }
 .main-list-item {
   font-weight: 400;
-  text-transform: uppercase;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -329,6 +330,7 @@ input[type=search]::-webkit-search-results-decoration {
   position: relative;
   width: 26px;
   height: 26px;
+  min-width: 26px;
   border: 1px solid var(--purple, #6C63FF);
   background-color: transparent;
   border-radius: 2px;
@@ -385,6 +387,7 @@ input[type=search]::-webkit-search-results-decoration {
   stroke: #E50000;
 }
 .main-list-item-text {
+  padding-right: 10px;
   -webkit-transition: color 0.3s ease, -webkit-text-decoration 0.3s ease;
   transition: color 0.3s ease, -webkit-text-decoration 0.3s ease;
   transition: color 0.3s ease, text-decoration 0.3s ease;
@@ -462,11 +465,13 @@ input[type=search]::-webkit-search-results-decoration {
 .modal-submit {
   padding: 5px 22px;
 }
-
-.main-empty.active {
-  position: static;
-  visibility: visible;
-  opacity: 1;
+.modal-submit:disabled {
+  background-color: #666;
+  cursor: auto;
+}
+.modal-submit:disabled:hover, .modal-submit:disabled:focus-visible, .modal-submit:disabled:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .main-list-item.checked .main-list-item-btn {
@@ -482,6 +487,11 @@ input[type=search]::-webkit-search-results-decoration {
 
 .hide {
   display: none;
+}
+
+body.open-modal {
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 .modal.open {
@@ -524,9 +534,13 @@ body.night-theme .settings-search-icon {
 }
 body.night-theme .settings-theme-day {
   opacity: 1;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 body.night-theme .settings-theme-night {
   opacity: 0;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 body.night-theme .main-list-item.checked .main-list-item-text {
   color: rgba(255, 255, 255, 0.5);

@@ -64,6 +64,7 @@ a {
     transition: background-color 0.3s ease,
         box-shadow 0.3s ease;
     cursor: pointer;
+    box-shadow: 0px 0px 4px 0px transparent;
 
     &:hover,
     &:focus-visible,
@@ -78,6 +79,7 @@ a {
     border: 1px solid $purple-color;
     border-radius: 5px;
     color: $purple-color;
+    outline: 2px solid transparent;
     transition: outline 0.3s ease;
 
     &::placeholder {
@@ -118,7 +120,7 @@ select::-ms-expand {
 }
 
 .settings {
-    padding-bottom: 13px;
+    padding-bottom: 35px;
 
     &-wrapper {
         display: flex;
@@ -176,7 +178,7 @@ select::-ms-expand {
     &-select {
         width: 100%;
         height: 100%;
-        padding: 8px 25px 8px 8px;
+        padding: 5px 25px 5px 8px;
         cursor: pointer;
     }
 
@@ -220,18 +222,16 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .main {
     position: relative;
-    min-height: 545px;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
 
     &-empty {
         position: absolute;
-        visibility: hidden;
-        opacity: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        transition: opacity 0.3s ease;
+        align-self: center;
     }
 
     &-empty-icon {
@@ -291,7 +291,6 @@ input[type="search"]::-webkit-search-results-decoration {
 
     &-list-item {
         font-weight: 400;
-        text-transform: uppercase;
         display: flex;
         align-items: center;
         padding: 17px 0;
@@ -311,6 +310,7 @@ input[type="search"]::-webkit-search-results-decoration {
         position: relative;
         width: 26px;
         height: 26px;
+        min-width: 26px;
         border: 1px solid var(--purple, $purple-color);
         background-color: transparent;
         border-radius: 2px;
@@ -380,6 +380,7 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 
     &-list-item-text {
+        padding-right: 10px;
         transition: color 0.3s ease,
             text-decoration 0.3s ease;
     }
@@ -456,20 +457,23 @@ input[type="search"]::-webkit-search-results-decoration {
 
     &-submit {
         padding: 5px 22px;
+
+        &:disabled {
+            background-color: $dark-grey-color;
+            cursor: auto;
+
+            &:hover,
+            &:focus-visible,
+            &:active {
+                box-shadow: none;
+            }
+        }
     }
 }
 
 // For JS
 
-// Empty list picture
-
-.main-empty.active {
-    position: static;
-    visibility: visible;
-    opacity: 1;
-}
-
-// Finished tasks
+// Mark finished tasks
 
 .main-list-item.checked {
     & .main-list-item-btn {
@@ -486,13 +490,18 @@ input[type="search"]::-webkit-search-results-decoration {
     }
 }
 
-// Sorting
+// Filter and search
 
 .hide {
     display: none;
 }
 
 // Modal
+
+body.open-modal {
+    height: 100vh;
+    overflow-y: hidden;
+}
 
 .modal.open {
     visibility: visible;
@@ -533,10 +542,12 @@ body.night-theme {
 
             &-day {
                 opacity: 1;
+                transition: opacity 0.3s ease;
             }
 
             &-night {
                 opacity: 0;
+                transition: opacity 0.3s ease;
             }
         }
     }
