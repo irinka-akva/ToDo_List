@@ -240,6 +240,11 @@ input[type=search]::-webkit-search-results-decoration {
       -ms-flex-direction: column;
           flex-direction: column;
 }
+@media (max-width: 480px) {
+  .main {
+    min-height: 100vh;
+  }
+}
 .main-empty {
   position: absolute;
   display: -webkit-box;
@@ -303,6 +308,11 @@ input[type=search]::-webkit-search-results-decoration {
   margin: 0;
   padding: 0 15%;
   list-style-type: none;
+}
+@media (max-width: 480px) {
+  .main-list {
+    padding: 0 5%;
+  }
 }
 .main-list-item {
   font-weight: 400;

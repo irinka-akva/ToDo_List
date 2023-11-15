@@ -20,10 +20,8 @@ if (localStorage.getItem('tasks')) {
 };
 
 if (localStorage.getItem('select')) {
-    options.forEach(element => {
-        if (element.textContent.toLocaleUpperCase() === localStorage.getItem('select')) element.selected = true;
-    });
-}
+    options.forEach((element) => element.selected = element.textContent.toLocaleUpperCase() === localStorage.getItem('select'));
+};
 
 checkEmptyList();
 filterList();
@@ -33,7 +31,7 @@ filterList();
 function changeTheme() {
     document.body.classList.toggle('night-theme');
     localStorage.getItem('theme') ? localStorage.setItem('theme', '') : localStorage.setItem('theme', 'night-theme');
-}
+};
 
 themeBtn.addEventListener('click', changeTheme);
 
@@ -50,14 +48,14 @@ function openModal() {
     getApplyActive();
     modal.classList.add('open');
     document.body.classList.add('open-modal');
-}
+};
 
 function closeModal() {
     modal.classList.remove('open');
     modalInput.value = '';
     document.body.classList.remove('open-modal');
     modalApply.classList.remove('edit');
-}
+};
 
 function closeModalByArea(evt) {
     if (!evt.target.closest('.modal-wrapper')) {
@@ -67,7 +65,7 @@ function closeModalByArea(evt) {
 
 function getApplyActive() {
     modalApply.disabled = !modalInput.value.trim();
-}
+};
 
 btn.addEventListener('click', openModal);
 btnCancel.addEventListener('click', closeModal);
@@ -123,11 +121,13 @@ function addTask(evt) {
             text: taskText,
             done: false,
         }
+
         tasks.push(newTask);
         saveToLocalStorage();
         renderTask(newTask);
         closeModal();
         checkEmptyList();
+        filterList();
     }
 };
 
@@ -166,17 +166,13 @@ function saveChangesTask(evt) {
         evt.preventDefault();
         const editedText = editedTask.querySelector('.main-list-item-text');
         editedText.textContent = modalInput.value;
-
-
         const id = editedTask.id;
         const index = tasks.findIndex((item) => item.id == id);
         tasks[index].text = modalInput.value;
         saveToLocalStorage();
-
         closeModal();
     }
 };
-
 
 list.addEventListener('click', editTask);
 modalForm.addEventListener('submit', saveChangesTask);
@@ -191,6 +187,7 @@ function setTaskMark(evt) {
         task.done = !task.done;
         saveToLocalStorage()
         parentNode.classList.toggle('checked');
+        filterList();
     }
 };
 
@@ -242,23 +239,26 @@ function filterList() {
         });
     };
 
-    if (value === 'COMPLETE') {
-        changeDisplay(uncheckedItems, 'none');
-        changeDisplay(checkedItems, '');
-    } else if (value === 'INCOMPLETE') {
-        changeDisplay(checkedItems, 'none');
-        changeDisplay(uncheckedItems, '');
-    } else if (value === 'ALL') {
-        document.querySelectorAll('.main-list-item').forEach((item) => item.style.display = '');
+    switch (value) {
+        case 'COMPLETE':
+            changeDisplay(uncheckedItems, 'none');
+            changeDisplay(checkedItems, '');
+            break;
+        case 'INCOMPLETE':
+            changeDisplay(checkedItems, 'none');
+            changeDisplay(uncheckedItems, '');
+            break;
+        case 'ALL':
+            document.querySelectorAll('.main-list-item').forEach((item) => item.style.display = '');
+            break;
     }
-
     localStorage.setItem('select', value);
 };
 
-select.addEventListener('change', filterList)
+select.addEventListener('change', filterList);
 
 // Save data to localStorage
 
 function saveToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+};
