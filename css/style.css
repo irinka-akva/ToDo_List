@@ -242,7 +242,7 @@ input[type=search]::-webkit-search-results-decoration {
 }
 @media (max-width: 480px) {
   .main {
-    min-height: 100vh;
+    min-height: 300px;
   }
 }
 .main-empty {
@@ -341,6 +341,7 @@ input[type=search]::-webkit-search-results-decoration {
   width: 26px;
   height: 26px;
   min-width: 26px;
+  max-width: 26px;
   border: 1px solid var(--purple, #6C63FF);
   background-color: transparent;
   border-radius: 2px;

@@ -227,7 +227,7 @@ input[type="search"]::-webkit-search-results-decoration {
     flex-direction: column;
 
     @media (max-width: 480px) {
-        min-height: 100vh;
+        min-height: 300px;
     }
 
     &-empty {
@@ -319,6 +319,7 @@ input[type="search"]::-webkit-search-results-decoration {
         width: 26px;
         height: 26px;
         min-width: 26px;
+        max-width: 26px;
         border: 1px solid var(--purple, $purple-color);
         background-color: transparent;
         border-radius: 2px;
