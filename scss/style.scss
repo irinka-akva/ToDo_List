@@ -316,10 +316,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
     &-list-item-btn {
         position: relative;
+        padding: 0;
         width: 26px;
         height: 26px;
         min-width: 26px;
-        max-width: 26px;
         border: 1px solid var(--purple, $purple-color);
         background-color: transparent;
         border-radius: 2px;
