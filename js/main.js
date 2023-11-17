@@ -44,6 +44,11 @@ function setAutofocusInModal() {
 };
 
 function openModal() {
+    btnCancel.addEventListener('click', closeModal);
+    modalInput.addEventListener('input', getApplyActive);
+    modal.addEventListener('click', closeModalByArea);
+    btn.removeEventListener('click', openModal);
+
     setAutofocusInModal();
     getApplyActive();
     modal.classList.add('open');
@@ -55,6 +60,11 @@ function closeModal() {
     modalInput.value = '';
     document.body.classList.remove('open-modal');
     modalApply.classList.remove('edit');
+
+    btnCancel.removeEventListener('click', closeModal);
+    modalInput.removeEventListener('input', getApplyActive);
+    modal.removeEventListener('click', closeModalByArea);
+    btn.addEventListener('click', openModal);
 };
 
 function closeModalByArea(evt) {
@@ -67,10 +77,7 @@ function getApplyActive() {
     modalApply.disabled = !modalInput.value.trim();
 };
 
-btn.addEventListener('click', openModal);
-btnCancel.addEventListener('click', closeModal);
-modalInput.addEventListener('input', getApplyActive);
-modal.addEventListener('click', closeModalByArea);
+ btn.addEventListener('click', openModal);
 
 // Add tasks
 
