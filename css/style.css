@@ -409,6 +409,12 @@ input[type=search]::-webkit-search-results-decoration {
   transition: color 0.3s ease, -webkit-text-decoration 0.3s ease;
   transition: color 0.3s ease, text-decoration 0.3s ease;
   transition: color 0.3s ease, text-decoration 0.3s ease, -webkit-text-decoration 0.3s ease;
+  word-break: break-all;
+}
+@media (max-width: 480px) {
+  .main-list-item-text {
+    font-size: 14px;
+  }
 }
 
 .modal {

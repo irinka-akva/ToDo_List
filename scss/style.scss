@@ -399,6 +399,11 @@ input[type="search"]::-webkit-search-results-decoration {
         padding-right: 10px;
         transition: color 0.3s ease,
             text-decoration 0.3s ease;
+        word-break: break-all;
+
+        @media (max-width: 480px) {
+            font-size: 14px;
+        }
     }
 }
 
