@@ -116,6 +116,7 @@ function renderTask(task) {
     </div>
 </li>`;
     list.insertAdjacentHTML("beforeend", taskHTML);
+    search(); 
 }
 
 function addTask(evt) {
@@ -156,7 +157,7 @@ function deleteTask(evt) {
 
 list.addEventListener('click', deleteTask);
 
-// Edit tasks
+// Edit task
 
 function editTask(evt) {
     if (evt.target.closest('.main-list-item-btn-edit')) {
@@ -177,6 +178,7 @@ function saveChangesTask(evt) {
         const index = tasks.findIndex((item) => item.id == id);
         tasks[index].text = modalInput.value;
         saveToLocalStorage();
+        search(); 
         closeModal();
     }
 };
@@ -208,7 +210,9 @@ function checkEmptyList() {
 <span class="main-empty-text">Empty...</span>
 </div>`;
     const listItems = document.querySelectorAll('.main-list-item');
-    if (listItems.length === 0) {
+    const listItemsHide = document.querySelectorAll('.hide');
+    const listItemsDisplayNone = Array.from(listItems).filter((item)=> item.style.display === "none");
+    if (listItems.length === 0 || listItemsHide.length === listItems.length || listItemsDisplayNone.length === listItems.length) {
         main.insertAdjacentHTML('afterbegin', emptyTextHTML);
     } else {
         const mainEmpty = document.querySelector('.main-empty');
@@ -229,6 +233,7 @@ function search() {
             } else item.closest('.main-list-item').classList.remove('hide');
         })
     } else document.querySelectorAll('.main-list-item').forEach((item) => item.classList.remove('hide'));
+    checkEmptyList();
 };
 
 searchInput.addEventListener('input', search);
@@ -260,6 +265,7 @@ function filterList() {
             break;
     }
     localStorage.setItem('select', value);
+    checkEmptyList();
 };
 
 select.addEventListener('change', filterList);
